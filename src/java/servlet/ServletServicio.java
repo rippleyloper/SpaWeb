@@ -5,7 +5,9 @@
  */
 package servlet;
 
+import controlador.ControladorListas;
 import controlador.ControladorServicio;
+import controlador.ControladorTrabajador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -17,6 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.ListaDetalleServicio;
+import modelo.Listas;
 import modelo.Servicio;
 
 /**
@@ -69,6 +73,88 @@ public class ServletServicio extends HttpServlet {
         */
                 
         try {
+            if(request.getParameter("data").equals("5")){
+                  JsonArrayBuilder array=Json.createArrayBuilder(); 
+                  JsonObjectBuilder obj=Json.createObjectBuilder();
+                  ArrayList<ListaDetalleServicio> serviciosDetalle = new ControladorServicio().obtenerDetalleServicioPorFecha("2018-07-29");
+                        for(ListaDetalleServicio ser:serviciosDetalle){
+                            ListaDetalleServicio listaDetalleObj = new ListaDetalleServicio();
+              
+               array.add(Json.createObjectBuilder().add("idDetalle",ser.getIdDetalle())
+                       .add("idPersona", ser.getIdPersona()).add("idAsistencia", ser.getIdAsistencia())
+                       .add("idServicio", ser.getIdServicio()).add("hora", ser.getHora().toString())
+                       .add("fecha", ser.getFecha().toString()).add("precio", ser.getPrecio())
+                       .add("descuento", ser.getDescuento()).add("pagado", ser.getPagado())
+                       .add("observacion", ser.getObservacion()).add("activo", ser.getActivo())
+                       
+                       
+                       
+               );
+                                  
+                        }
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        
+                        
+                        Json.createWriter(response.getWriter()).writeArray(array.build());
+          }
+            
+        /*  if(request.getParameter("data").equals("2")){
+                  JsonArrayBuilder array=Json.createArrayBuilder(); 
+                  JsonObjectBuilder obj=Json.createObjectBuilder();
+                  ArrayList<ListaDetalleServicio> serviciosDetalle = new ControladorServicio().obtenerDetalleServicioPorFecha("2018-07-29");
+                        for(ListaDetalleServicio ser:serviciosDetalle){
+                            ListaDetalleServicio listaDetalleObj = new ListaDetalleServicio();
+              
+               array.add(Json.createObjectBuilder().add("idDetalle",ser.getIdDetalle())
+                       .add("idPersona", ser.getIdPersona()).add("idAsistencia", ser.getIdAsistencia())
+                       .add("idServicio", ser.getIdServicio()).add("hora", ser.getHora().toString())
+                       .add("fecha", ser.getFecha().toString()).add("precio", ser.getPrecio())
+                       .add("descuento", ser.getDescuento()).add("pagado", ser.getPagado())
+                       .add("observacion", ser.getObservacion()).add("activo", ser.getActivo())
+                       
+                       
+                       
+               );
+                                  
+                        }
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        
+                        
+                        Json.createWriter(response.getWriter()).writeArray(array.build());
+          }
+            /*
+                              if (request.getParameter("data").equals("3")) {
+
+                String fecha = request.getParameter("fechad");
+                ArrayList<Servicio> servicios = new ControladorServicio().obtenerPorFecha(fecha);
+               
+                    JsonArrayBuilder array = Json.createArrayBuilder();
+                    for (Servicio ser : servicios) {
+                        array.add(Json.createObjectBuilder().add("servicio",
+                                Json.createObjectBuilder().add("idServicio", ser.getIdServicio())
+                                        .add("idCategoria", ser.getIdCategoria())
+                                        .add("idDetalle", ser.getDetalle())
+                                        .add("hora", ser.getHora())
+                                        .add("incio", ser.getInicio())
+                                        .add("precio", ser.getPrecio())
+                                        .add("estado", ser.getEstado())
+                                        .add("termino", ser.getTermino())
+                                        .add("idServicio", ser.getIdServicio())
+                                        .add("nombreServicio", ser.getNombre())
+                                        .add("duracion", ser.getDuracion())
+                        ));
+                    }
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    Json.createWriter(response.getWriter()).writeArray(array.build());
+                
+              response.sendRedirect("AdmonAgenda.jsp");    
+//Aqui
+
+            }*/
+            /*
           if(!request.getParameter("data").isEmpty()){
                 String valor=request.getParameter("data");
                 if(valor.equals("1")){
@@ -91,7 +177,9 @@ public class ServletServicio extends HttpServlet {
                     }
                 }
                 
-            }
+            }*/
+  
+          
         } catch (Exception e) {
             System.out.println(e.getMessage());
             response.getWriter().print(e.getMessage());
@@ -151,6 +239,7 @@ public class ServletServicio extends HttpServlet {
                 }
                 
             }
+       
         } catch (Exception e) {
             response.getWriter().print(e.getMessage());
         }
@@ -167,4 +256,3 @@ public class ServletServicio extends HttpServlet {
     }// </editor-fold>
 
 }
-                                                    

@@ -1,9 +1,14 @@
 $(document).ready(function () {
     botones();
     cargarHorario();
+  
+	botones2();
+       
 });
 function cargarHorario() {
     obtenerTrabajadores();
+      obtenerServicios();
+   // obtenerServicios();
 }
 function cargarHorario2() {
     alert('cargandoPerro()');
@@ -45,6 +50,33 @@ function botones() {
     });
 }
 
+function obtenerServicios(){
+          var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+var hh = today.getHours();
+var ss = today.getSeconds();
+//var fecha = dd+'/'+mm+'/'+yyyy+' ';
+var fecha = '2018-07-29';
+alert('fec'+fecha);
+
+    $.ajax({
+        url: "ServletServicio",
+        type: "GET",
+        data: {data: 5},
+        dataType: "json",
+        success: function (data){
+            alert(JSON.stringify(data));
+        },
+          error: function (evt) {
+            swal("Error", "Problemas de conexion, numero de error C025", "error");
+        }
+    })
+}
+
+
+
 function obtenerTrabajadores() {
     $.ajax({
         url: "ServletTrabajador",
@@ -67,11 +99,19 @@ function obtenerTrabajadores() {
                 var fondo = 'style="background-color: #dddddd!important;"';
                 celda = '<th ' + tamanoCelda + ' class="' + claseth + '" ' + fondo + ' data-date="2018-07-22"><a>' + data[i].nombre + ' ' + data[i].apellido + ' </a></th>'
                 $('#tabla-horas > thead > tr  ').append(celda);
+                 var horas = [];
                 $('#tabla-horas > tbody > tr').each(function () {
                     console.log(this.id);
-                    var argumentoProfesional = "'" + data[i].nombre + " " + data[i].apellido + "'";
-
-                    tdcito = '<td ' + tamanoCelda2 + ' onclick="torombolo(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
+                   
+                    var auxHora = this.id;
+                    var str = "h6:00:00";
+                    var idHora = auxHora.substring(1, str.length);
+                   //  alert('res'+idHora);
+    
+                  
+                    var argumentoProfesional = "'" + data[i].nombre + " " + data[i].apellido + "' , '"+data[i].DNI+"'";
+                 
+                    tdcito = '<td id="'+idHora+'" ' + tamanoCelda2 + ' onclick="torombolo(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
                     $(this).append(tdcito);
                     // $('#tabla-horas > tbody>  tr').append(tdcito)
                 })
@@ -81,13 +121,17 @@ function obtenerTrabajadores() {
             var largoTrabajadores = data.length;
             var recorrido = 0;
             recorrido = 7 - largoTrabajadores;
+                
             for (i = 0; i < recorrido; i++) {
+                
                 celda = '<th class="fc-day-header fc-widget-header fc-sun fc-past" data-date="2018-07-22"><a>&nbsp</a></th>'
                 $('#tabla-horas > thead > tr  ').append(celda);
+             
                 tdcito = '<td  ' + tamanoCelda + ' class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
                 $('#tabla-horas tr').append(tdcito);
             }
             console.log("ready!");
+            alert('probando2'+horas.length);
         },
         error: function (evt) {
             swal("Error", "Problemas de conexion, numero de error C025", "error");

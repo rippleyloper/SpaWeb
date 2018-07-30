@@ -230,7 +230,8 @@ public class ServletReservas extends HttpServlet {
                 int nu=new ControladorCliente().obtenerId(request.getParameter("dni"));
                 if(nu>0){
                     Servicio ser=new ControladorServicio().buscarServicio(Integer.parseInt(request.getParameter("servicio")));
-                    String fecha=request.getParameter("inicio");
+                  //  String fecha=request.getParameter("inicio");
+                    String fecha=request.getParameter("fecha");
                     String detalle=request.getParameter("detalle");
                     java.util.Date da=new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(fecha);
                     Date dia=new Date(new SimpleDateFormat("dd/MM/yyyy").parse(new SimpleDateFormat("dd/MM/yyyy").format(da)).getTime());

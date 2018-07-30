@@ -4,9 +4,9 @@ dato=null;
 user=null;
 cli=null;
 $(document).ready(function(){
-	botones();
+   
 });
-function botones(){
+function botones2(){
 	obtenerAgendas();
 	servicios();
 	calendario();
@@ -25,9 +25,25 @@ function botones(){
 		}
 	});
 	$("#servicio").change(function(){
+      var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+var hh = today.getHours();
+var ss = today.getSeconds();
+var fecha = dd+'/'+mm+'/'+yyyy+' '+hh+':'+ss;
 		if(this.value>0){
-			detalles(dato,this.value);
+                   
+
+ 
+			
+			detalles(fecha,this.value);
+                        
+                  
 		}
+                $("#fecha").val(fecha);
+alert(fecha);
+                 
 	});
 	$("#btnAgendar").click(function(evt){
 		evt.preventDefault();
@@ -100,10 +116,10 @@ function obtenerAgendas(){
 		success:function(data){
 			detalle=null;
 			detalle=data;
-			armarCalendario();
+	//		armarCalendario();
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 3C025");
 		}
 	});
 }
@@ -126,7 +142,7 @@ function servicios(){
 			}
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");	
+			swal("Error","Error de conexion, numero de error 4C025");	
 		}
 	});
 }
@@ -147,7 +163,7 @@ function obtenerServicio(id){
 			}
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 5C025");
 		}
 	});	
 }
@@ -189,7 +205,7 @@ function trabajador(id){
 			}
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 8C025");
 		}
 	});
 }
@@ -210,11 +226,11 @@ function detalles(fecha,id){
 			}
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 9C025");
 		}
 	});
 }
-function armarCalendario(){
+/*function armarCalendario(){
 	cale=[];
 	$.each(detalle,function(x,data){
 		var totalD=data.curso.precio-(data.curso.precio*(data.curso.descuento/100));
@@ -244,6 +260,7 @@ function armarCalendario(){
 	$("#calendar").fullCalendar('removeEvents');
 	$("#calendar").fullCalendar('addEventSource',cale);
 }
+*/
 function calendario(){
 	$("#calendar").fullCalendar({
 		header: {
@@ -290,7 +307,7 @@ function insertar(){
 	$.ajax({
 		url:"ServletReservas",
 		type:"POST",
-		data:{btnAgendar:'agendar',inicio:dato,servicio:$("#servicio").val(),dni:$("#dni").val(),detalle:$("#detalle").val(),trabajador:$("#trabajador").val(),descuento:$("#descuento").val(),pagado:$("#pagado").val()},
+		data:{btnAgendar:'agendar',inicio:dato,servicio:$("#servicio").val(),dni:$("#dni").val(),detalle:$("#detalle").val(),trabajador:$("#trabajador").val(),descuento:$("#descuento").val(),pagado:$("#pagado").val(),fecha:$("#fecha").val()},
 		dataType:"JSON",
 		success:function(data){
 			
@@ -302,7 +319,7 @@ function insertar(){
 			load();
 		},
 		error:function(e){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 10C025");
 		}
 	});
 }
@@ -348,7 +365,7 @@ function obtenerDni(id){
 			}
 		},
 		error:function(error){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 11C025");
 		}
 	});
 }
@@ -431,14 +448,14 @@ function action2(det,id,total){
 						return false;
 					}
 				});
-				armarCalendario();
+				//armarCalendario();
 				load();
 				$("#modalDetalle").modal("hide");
 				cli=null;
 			}
 		},
 		error:function(e){
-			swal("Error","Error de conexion, numero de error C025");
+			swal("Error","Error de conexion, numero de error 2C025");
 		}
 	});
 }
