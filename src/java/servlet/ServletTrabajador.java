@@ -176,6 +176,16 @@ public class ServletTrabajador extends HttpServlet {
                     request.getSession().setAttribute("msg", new Listas(2, "No se pudo activar"));
                 response.sendRedirect("activarTrabajador.jsp");
             }
+            else if(request.getParameter("data").equals("11")){
+                ControladorTrabajador controladorTrabajador = new ControladorTrabajador();
+                String  dniTrabajador = "";
+                dniTrabajador =   controladorTrabajador.obtenerDniTrabajador(Integer.parseInt(request.getParameter("idTrabajador")));
+                JsonObjectBuilder obj=Json.createObjectBuilder();
+                obj.add("dni", dniTrabajador);
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    Json.createWriter(response.getWriter()).writeObject(obj.build());
+            }
             
         } catch (Exception e) {
             request.getSession().setAttribute("msg", new Listas(2, "Problemas de conexion, numero de error C025"));

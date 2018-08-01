@@ -20,6 +20,7 @@ private String Observacion;
 private int duracion;
 private String nombreServicio;
 private int activo;
+private int idTrabajador;
 
     /**
      * @return the idDetalle
@@ -201,6 +202,20 @@ private int activo;
      */
     public void setActivo(int activo) {
         this.activo = activo;
+    }
+
+    /**
+     * @return the idTrabajador
+     */
+    public int getIdTrabajador() {
+        return idTrabajador;
+    }
+
+    /**
+     * @param idTrabajador the idTrabajador to set
+     */
+    public void setIdTrabajador(int idTrabajador) {
+        this.idTrabajador = idTrabajador;
     }
     
 }

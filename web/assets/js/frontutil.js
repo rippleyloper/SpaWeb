@@ -2,6 +2,15 @@
    $('#myModal').modal({keyboard: true }) 
             $('#myModal').modal("hide");
 
+function sumarMinutos(horas, minutos){
+    const tiempoInicial = horas; //'12:30:00';
+const minutosDuracion = minutos; //'120';
+const tiempoFinal = moment(tiempoInicial, 'HH:mm:ss').add(minutosDuracion, 'minutes').format('HH:mm');
+    console.log(tiempoFinal);
+    return tiempoFinal;
+    
+}
+
 function inicialMayus(item) {
     var palabraMin = item.value.toLowerCase();
     var palabraConv = (mayusPrimeraLetra(palabraMin));

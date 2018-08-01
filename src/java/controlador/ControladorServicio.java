@@ -231,7 +231,7 @@ public class ControladorServicio {
     public ArrayList<ListaDetalleServicio> obtenerDetalleServicioPorFecha(String fecha) {
         try {
             Conexion con = Conexion.newInstance();
-            String sql = "select idDetalle, idPersona, idAsistencia, s.idServicio, hora, fecha, s.precio, descuento, pagado, observacion, duracion, nombre , activo from detalle_servicio as ds, servicio as s WHERE s.idServicio = ds.idServicio AND fecha = ?";
+            String sql = "select ds.idDetalle, ds.idPersona as idCliente, idTrabajador, idAsistencia, s.idServicio, hora, fecha, s.precio, descuento, pagado, observacion, duracion, nombre , activo from detalle_trabajador as dt, detalle_servicio as ds, servicio as s WHERE ds.idServicio = ds.idServicio AND ds.idDetalle = dt.idDetalle AND s.idServicio = ds.idServicio AND fecha = ?";
             PreparedStatement stm = con.getConexion().prepareStatement(sql);
             stm.setString(1, fecha);
             ResultSet rs = stm.executeQuery();
@@ -243,7 +243,7 @@ public class ControladorServicio {
             while (rs.next()) {
                 ListaDetalleServicio listaDetalleObj = new ListaDetalleServicio();
                 listaDetalleObj.setIdDetalle(rs.getInt("idDetalle"));
-                listaDetalleObj.setIdPersona(rs.getInt("idPersona"));
+                listaDetalleObj.setIdPersona(rs.getInt("idCliente"));
                 listaDetalleObj.setIdAsistencia(rs.getInt("idAsistencia"));
                 listaDetalleObj.setIdServicio(rs.getInt("idServicio"));
                 listaDetalleObj.setHora(rs.getTime("hora"));
@@ -253,6 +253,8 @@ public class ControladorServicio {
                 listaDetalleObj.setPagado(rs.getInt("pagado"));
                 listaDetalleObj.setObservacion(rs.getString("observacion"));
                 listaDetalleObj.setActivo(rs.getInt("activo"));
+                listaDetalleObj.setDuracion(rs.getInt("duracion"));
+                listaDetalleObj.setIdTrabajador(rs.getInt("idTrabajador"));
 
                 servicioDetalles.add(listaDetalleObj);
 

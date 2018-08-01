@@ -15,7 +15,10 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
@@ -233,9 +236,14 @@ public class ServletReservas extends HttpServlet {
                   //  String fecha=request.getParameter("inicio");
                     String fecha=request.getParameter("fecha");
                     String detalle=request.getParameter("detalle");
-                    java.util.Date da=new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(fecha);
+                    java.util.Date da=new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(fecha); 
+                    String hora = request.getParameter("incio");
+                    DateFormat formatter = new SimpleDateFormat("hh:mm ");
+                   
+               
                     Date dia=new Date(new SimpleDateFormat("dd/MM/yyyy").parse(new SimpleDateFormat("dd/MM/yyyy").format(da)).getTime());
                     DetalleServicio ds=new DetalleServicio(0, ser.getIdServicio(), nu, "3", new Time(da.getTime()),dia, detalle, ser.getPrecio(),Integer.parseInt(request.getParameter("descuento")),Integer.parseInt(request.getParameter("pagado")));
+                   // DetalleServicio ds=new DetalleServicio(0, ser.getIdServicio(), nu, "3", t ,dia, detalle, ser.getPrecio(),Integer.parseInt(request.getParameter("descuento")),Integer.parseInt(request.getParameter("pagado")));
                     ControladorDetalleServicio cds=new ControladorDetalleServicio();
                     System.out.println(cds.insertarDetalle(ds));
                     cds.agregarDetalleTrabajador(new ControladorTrabajador().buscar(request.getParameter("trabajador")));

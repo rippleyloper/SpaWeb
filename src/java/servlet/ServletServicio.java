@@ -76,16 +76,18 @@ public class ServletServicio extends HttpServlet {
             if(request.getParameter("data").equals("5")){
                   JsonArrayBuilder array=Json.createArrayBuilder(); 
                   JsonObjectBuilder obj=Json.createObjectBuilder();
-                  ArrayList<ListaDetalleServicio> serviciosDetalle = new ControladorServicio().obtenerDetalleServicioPorFecha("2018-07-29");
+                  ArrayList<ListaDetalleServicio> serviciosDetalle = new ControladorServicio().obtenerDetalleServicioPorFecha(request.getParameter("fecha"));
                         for(ListaDetalleServicio ser:serviciosDetalle){
                             ListaDetalleServicio listaDetalleObj = new ListaDetalleServicio();
-              
+
                array.add(Json.createObjectBuilder().add("idDetalle",ser.getIdDetalle())
                        .add("idPersona", ser.getIdPersona()).add("idAsistencia", ser.getIdAsistencia())
                        .add("idServicio", ser.getIdServicio()).add("hora", ser.getHora().toString())
                        .add("fecha", ser.getFecha().toString()).add("precio", ser.getPrecio())
                        .add("descuento", ser.getDescuento()).add("pagado", ser.getPagado())
                        .add("observacion", ser.getObservacion()).add("activo", ser.getActivo())
+                       .add("duracion", ser.getDuracion())
+                       .add("idTrabajador", ser.getIdTrabajador())
                        
                        
                        

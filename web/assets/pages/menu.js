@@ -6,6 +6,22 @@ cli=null;
 $(document).ready(function(){
    
 });
+var resultado = '';
+var termino2 = '';
+function agendarServicio(nombre, dni, idHora){
+  
+      
+					$('#modalFecha').modal('show');
+                                        $('#trabajadortexto').val(nombre);
+                                        $('#trabajador').val(dni);
+                                        var horaServicio = idHora;
+                                         var resultadoinicio = horaServicio.substring(1, 9);
+                                         resultado = horaServicio.substring(1, 6);
+                                         termino2 = sumarMinutos(resultado, 30);
+                                         
+                                     //   alert(termino2);
+}
+                     
 function botones2(){
 	obtenerAgendas();
 	servicios();
@@ -31,7 +47,9 @@ var mm = today.getMonth()+1; //January is 0!
 var yyyy = today.getFullYear();
 var hh = today.getHours();
 var ss = today.getSeconds();
-var fecha = dd+'/'+mm+'/'+yyyy+' '+hh+':'+ss;
+//var horaInicio = $("#inicio").val();
+var fecha = dd+'/'+mm+'/'+yyyy+' '+resultado;
+
 		if(this.value>0){
                    
 
@@ -42,7 +60,7 @@ var fecha = dd+'/'+mm+'/'+yyyy+' '+hh+':'+ss;
                   
 		}
                 $("#fecha").val(fecha);
-alert(fecha);
+//alert(fecha);
                  
 	});
 	$("#btnAgendar").click(function(evt){
@@ -209,7 +227,7 @@ function trabajador(id){
 		}
 	});
 }
-function detalles(fecha,id){
+function detalles(fecha,id, ){
 	$.ajax({
 		url:"ServletReservas",
 		type:"GET",
@@ -219,8 +237,8 @@ function detalles(fecha,id){
 			
 			if(data!=null){
 				$("#duracion").val(data.duracion);
-				$("#inicio").val(data.inicio);
-				$("#termino").val(data.termino);
+				$("#inicio").val(resultado);
+				$("#termino").val(termino2);
 				$("#precio").val(data.precio);
 				$("#total2").val(data.precio);
 			}

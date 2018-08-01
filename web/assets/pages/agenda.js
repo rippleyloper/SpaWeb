@@ -1,49 +1,57 @@
 $(document).ready(function () {
     botones();
     cargarHorario();
+    botones2();
+    });
+    var dataReserva = 'hola';
+    var dnitrabajador = 'cc';
+    var horaAntigua ='';
+    var horaInicial = '';
+
+function pintarCelda(horaParm, dniParm){
+    $("#tabla-horas > tbody > tr ").each(function(){
+    var tr = $(this);
+    var tds = tr.find("td[id='"+horaParm+":"+dniParm+"']").css('background-color','#337ab7');
+    })
+}
+
+function pintarAgenda(dni, hora, duracion){
+    dniTrabajador = dni;
+    var cantidadCeldaAgenda = duracion/15;
+    horaInicial = hora;
+    horaAntigua = hora;
   
-	botones2();
-       
-});
+        for (var j = 0; j < cantidadCeldaAgenda; j++) {
+            if(j!=0){
+              pintarCelda(horaInicial+':00', dniTrabajador);  
+              horaAntigua = sumarMinutos(horaInicial, 15);         
+          }
+          else {
+      
+            pintarCelda(horaInicial, dniTrabajador);  
+            horaAntigua = sumarMinutos(horaInicial, 15);
+          }
+            horaInicial = horaAntigua;
+    }
+}
+
+function recorrerTrabajador(){
+    
+    for (var i = 0; i < dataReserva.length; i++) {
+       obtenerDniTrabajador(dataReserva[i].idTrabajador, dataReserva[i].hora, dataReserva[i].duracion);
+    }
+}
+
+
+
 function cargarHorario() {
     obtenerTrabajadores();
-      obtenerServicios();
-   // obtenerServicios();
+    obtenerServicios(); 
 }
-function cargarHorario2() {
-    alert('cargandoPerro()');
-    var perro = '<tr id="06:00:00" data-time="06:00:00">'
-    perro = '<td class="fc-axis fc-time fc-widget-content" style="width: 58px;">';
-    perro = '<span>perroloco</span></td>';
-    perro = '<td>';
-    perro = '</td></tr>';
 
-    var trCuerpo = '';
-
-    trCuerpo = '<tr><td class="fc-axis fc-widget-content" style="width: 58px;"><span>all-day</span></td><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2018-07-22"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2018-07-23"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2018-07-24"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2018-07-25"></td><td class="fc-day fc-widget-content fc-thu fc-today " data-date="2018-07-26"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2018-07-27"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2018-07-28"></td></tr>';
-
-    var cabecerath1 = '<th class="fc-axis fc-widget-header" style="width: 58px;"></th>';
-
-
-    $("#cabecera").css({display: "block", overflow: "scroll"});
-    var celda2 = '<th class="fc-day-header fc-widget-header fc-sun fc-past" data-date="2018-07-22"><a> thomas </a></th>'
-
-    trCuerpo = '<tr style="position:fixed;top:0;background:#FFF;"><td class="fc-axis fc-widget-content" style="width: 58px;"><span>all-dayperro</span></td><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2018-07-22"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2018-07-23"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2018-07-24"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2018-07-25"></td><td class="fc-day fc-widget-content fc-thu fc-today " data-date="2018-07-26"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2018-07-27"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2018-07-28"></td></tr>';
-
-    $("#cuerpo2").html(trCuerpo);
-    $("#cuerpo3").append(trCuerpo);
-    $("#cuerpo3").append(trCuerpo);
-
-}
 function botones() {
-    // $("#perro").click(function (evt) {
-
-
     $("#cargarHorario").click(function (evt) {
-
-        obtenerTrabajadores();
-
-
+    obtenerTrabajadores();
     });
     $('#cargarP').click(function (evt) {
         obtenerTrabajadores();
@@ -53,21 +61,34 @@ function botones() {
 function obtenerServicios(){
           var today = new Date();
 var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
+var mm = today.getMonth()+1;
 var yyyy = today.getFullYear();
 var hh = today.getHours();
 var ss = today.getSeconds();
-//var fecha = dd+'/'+mm+'/'+yyyy+' ';
-var fecha = '2018-07-29';
-alert('fec'+fecha);
-
+var fecha = $("#fechaHoy").val();
     $.ajax({
         url: "ServletServicio",
         type: "GET",
-        data: {data: 5},
+        data: {data: 5, fecha: fecha},
         dataType: "json",
         success: function (data){
-            alert(JSON.stringify(data));
+             dataReserva = data;
+             recorrerTrabajador();
+             for (i = 0; i < data.length; i++) {          
+             var idTrabajador = data[i].idTrabajador;
+             var horar = data[i].hora;
+             $("#tabla-horas > tbody > tr ").each(function(){
+        var tr = $(this);
+        var tds = tr.find("td[id='"+horar+""+dnitrabajador+"']").css('background-color','#337ab7');
+    })            
+            }
+              
+            $("#tabla-horas > tbody > tr ").each(function(){
+        var tr = $(this);
+        var tds = tr.find("td[id='08:30:0:Thomas']").css('background-color','#337ab7');
+        var tds2 = tr.find("td[id='08:45:0:Thomas']").css('background-color','#337ab7');
+        var tds2 = tr.find("td[id='09:30:0:Thomas']").css('background-color','#337ab7');
+    })       
         },
           error: function (evt) {
             swal("Error", "Problemas de conexion, numero de error C025", "error");
@@ -75,7 +96,20 @@ alert('fec'+fecha);
     })
 }
 
-
+function obtenerDniTrabajador(idTrabajador, hora, duracion){
+    $.ajax({
+        url: "ServletTrabajador",
+        type: "GET",
+        data: {data: 11, idTrabajador: idTrabajador},
+        dataType: "json",
+        success: function (data){
+             dnitrabajador = data["dni"];
+             pintarAgenda(dnitrabajador, hora, duracion);
+             
+        }
+        
+    })
+}
 
 function obtenerTrabajadores() {
     $.ajax({
@@ -84,6 +118,7 @@ function obtenerTrabajadores() {
         data: {data: 10},
         dataType: "json",
         success: function (data) {
+          
             var tamanoCelda = 'style="width: 130px!important; " ';
             var tamanoCelda2 = 'style="width: 105px!important;  height: 1px!important;" ';
             var tdcito = '';
@@ -102,36 +137,26 @@ function obtenerTrabajadores() {
                  var horas = [];
                 $('#tabla-horas > tbody > tr').each(function () {
                     console.log(this.id);
-                   
                     var auxHora = this.id;
                     var str = "h6:00:00";
-                    var idHora = auxHora.substring(1, str.length);
-                   //  alert('res'+idHora);
-    
-                  
-                    var argumentoProfesional = "'" + data[i].nombre + " " + data[i].apellido + "' , '"+data[i].DNI+"'";
-                 
-                    tdcito = '<td id="'+idHora+'" ' + tamanoCelda2 + ' onclick="torombolo(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
+                    var idHora = auxHora.substring(1, 9);
+                    var argumentoProfesional = "'" + data[i].nombre + " " + data[i].apellido + "' , '"+data[i].DNI+"','"+this.id+"' ";                  
+                    tdcito = '<td id="'+idHora+':'+data[i].DNI+'"  onclick="agendarServicio(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
                     $(this).append(tdcito);
-                    // $('#tabla-horas > tbody>  tr').append(tdcito)
                 })
             }
-
-
             var largoTrabajadores = data.length;
             var recorrido = 0;
-            recorrido = 7 - largoTrabajadores;
-                
+            recorrido = 7 - largoTrabajadores;   
             for (i = 0; i < recorrido; i++) {
                 
                 celda = '<th class="fc-day-header fc-widget-header fc-sun fc-past" data-date="2018-07-22"><a>&nbsp</a></th>'
                 $('#tabla-horas > thead > tr  ').append(celda);
-             
                 tdcito = '<td  ' + tamanoCelda + ' class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
                 $('#tabla-horas tr').append(tdcito);
             }
             console.log("ready!");
-            alert('probando2'+horas.length);
+           
         },
         error: function (evt) {
             swal("Error", "Problemas de conexion, numero de error C025", "error");

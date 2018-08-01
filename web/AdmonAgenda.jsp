@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
 <c:if test="${sessionScope.usuario==null}">
     <c:redirect url="index.jsp"></c:redirect>
 </c:if>
@@ -14,6 +16,9 @@
 
 <html>
     <head>
+        <style>
+
+            </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -56,6 +61,23 @@
         <div class="content-page">
             <!-- Start content -->
             <div class="content">
+<%
+  Date dNow = new Date();
+   SimpleDateFormat ft = 
+   new SimpleDateFormat ("MM/dd/yyyy hh:mm");
+   String currentDate = ft.format(dNow);
+   
+SimpleDateFormat fh = 
+   new SimpleDateFormat ("yyyy-MM-dd");
+   String hoy = fh.format(dNow);
+   
+   
+
+   
+%>
+
+<a type="button" id="pint" onclick="pintar()">Pintar</a>
+ 
 
                 <div class="">
                     <div class="page-header-title">
@@ -349,7 +371,7 @@
       <div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left">mes</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default fc-state-active">semana</button><button type="button" class="fc-agendaDay-button fc-button fc-state-default fc-corner-right">Día</button></div>
    </div>
    <div class="fc-center">
-      <h2>Jul 22 – 28, 2018</h2>
+       <h2>Fecha desde el Servidor: <input type="text" id="fechaHoy" readonly value="<%=hoy%>"> </h2>
    </div>
    <div class="fc-clear"></div>
 </div>
@@ -389,9 +411,9 @@
                            </table>
                     !-->
                         <div class="fc-slats">
-                            <div style="table-responsive"">
+                            <div style="table-responsive">
                                 
-                           <table id="tabla-horas" class="table table-striped">
+                           <table id="tabla-horas" class="table table-striped " >
                               
                             
                                <thead >
@@ -783,18 +805,12 @@
                     <script src="assets/js/jquery.blockUI.js"></script>
                     <script src="assets/js/waves.js"></script>
                     <script src="assets/js/wow.min.js"></script>
+                    <script src="assets/js/frontutil.js"></script>
                     <script src="assets/js/jquery.nicescroll.js"></script>
                     <script src="assets/js/jquery.scrollTo.min.js"></script>
                     <script src="assets/pages/agenda.js"></script>
-                    <script>
-function torombolo(sel, dni){
-  
-      
-					$('#modalFecha').modal('show');
-                                        $('#trabajadortexto').val(sel);
-                                        $('#trabajador').val(dni);
-}
-                        </script>
+                
+
 
                     <!--Morris Chart-->
 
