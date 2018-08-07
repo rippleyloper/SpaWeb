@@ -90,6 +90,10 @@
                                                 <td>${tra.getNombre()}</td>
                                                 <td>
                                                     <input type="button" class="btn btn-primary" value="Activar" onclick="window.location.href='ServletTrabajador?data=10&dni=${tra.getDni()}'">
+                                                     </td>
+                                                     <td>
+                                                    <input type="button" class="btn btn-danger" value="Eliminar" onclick="removerTrabajador('10')">
+                                                
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -128,6 +132,7 @@
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
+        <script src="assets/pages/agregarTrabajador.js"></script>
 
         <!--Morris Chart-->
         
@@ -155,6 +160,7 @@
         </script>
         <!-- End js only page -->
         <!-- Begin JS all page -->
+        
         <script src="assets/js/app.js"></script>
         <!-- End js all page -->
     </body>

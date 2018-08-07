@@ -37,7 +37,7 @@ public class ControladorListas {
     public ArrayList<Listas> obtenerBario(int id){
         try {
             Conexion con=Conexion.newInstance();
-            String sql="SELECT `idBarrio`, `nombre` FROM `barrio` WHERE idDepartamento=? and activo=1";
+            String sql="SELECT `idBarrio`, `nombre` FROM `barrio`  WHERE idDepartamento=? and activo=1 ORDER BY nombre";
             PreparedStatement stm=con.getConexion().prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs=stm.executeQuery();

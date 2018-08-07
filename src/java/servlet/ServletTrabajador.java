@@ -186,6 +186,21 @@ public class ServletTrabajador extends HttpServlet {
                     response.setCharacterEncoding("UTF-8");
                     Json.createWriter(response.getWriter()).writeObject(obj.build());
             }
+            else if(request.getParameter("data").equals("12")){
+                
+                if(new ControladorTrabajador().removerTrabajador(Integer.parseInt(request.getParameter("idTrabajador"))))
+                    
+         
+                    request.getSession().setAttribute("msg", new Listas(1, "Eliminado correctamente"));
+                    
+                else
+                    request.getSession().setAttribute("msg", new Listas(2, "No se pudo eliminar"));
+                response.sendRedirect("AdmonTrabajador.jsp");
+                /*
+                int idTrabajador = Integer.parseInt(request.getParameter("dni"));
+                ControladorTrabajador controladorTrabajador = new ControladorTrabajador();
+                controladorTrabajador.removerTrabajador(idTrabajador);*/
+            }
             
         } catch (Exception e) {
             request.getSession().setAttribute("msg", new Listas(2, "Problemas de conexion, numero de error C025"));

@@ -12,6 +12,7 @@ function botones(){
 		alert('hola');
                  
 	});
+        
             $("#agregar").click(function(evt){
 		document.getElementById('form').reset();
 		obtenerEspecialidad();
@@ -29,7 +30,8 @@ function botones(){
 	obtenerEspecialidad();
 	obtenerSucursal();
 	$("#departamento").change(function(evt){
-		if(!(this.value==""))
+                
+		if(!(this.value=="") )
 			obtenerBarrio(this.value);
 		else{
 			var barrio=$("#barrio2");
@@ -78,7 +80,35 @@ function obtenerTrabajadores(){
 
 	});
 }
+function removerTrabajador(idTrabajador){
+    alert('dni'+idTrabajador);
+    	swal({
+		title:"¿Estas seguro?",
+		text:"una vez eliminado, no se podrá revertir el cambio",
+		type:"warning",
+		showCancelButton:!0,
+		confirmButtonClass:"btn-warning",
+		confirmButtonText:"Si, borralo!",
+		closeOnConfirm:!1},function(){
+                
+                $.ajax({
+		url:"ServletTrabajador",
+		type:"GET",
+		data:{data:12, idTrabajador: idTrabajador},
+		dataType:"json",
+		success:function(data){
+                    alert(data);
+                },
+		
+		error:function(evt){
+			swal("Error","Problemas de conexion, numero de error C025", "error");
+		}
 
+
+		
+	});
+})
+}
 function obtenerGenero(){
 	$.ajax({
 		url:"ServletTrabajador",
@@ -125,9 +155,13 @@ function obtenerBarrio(id){
         contentType: "application/json; charset=utf-8",
 		success :function(data){	
 			var barrio=$("#barrio2");
+                       
 			barrio.empty();
+                         barrio.append('<option value="178">Pocitos</option>');
 			$.each(data,function(i,val){
+                            if(val.id != 178){
 				barrio.append('<option value="'+val.id+'">'+val.nombre+'</option>');
+                            }
 			});
 		},
 		error :function(error){
@@ -144,7 +178,7 @@ function obtenerEspecialidad(){
 		success:function(data){
 			var espe=$("#especialidad");
 			espe.empty();
-			espe.append('<option value="0">Seleccione</option>');
+			//espe.append('<option value="0">Seleccione</option>');
 			$.each(data,function(i,val){
 				espe.append('<option value="'+val.id+'">'+val.nombre+'</option>');
 			});

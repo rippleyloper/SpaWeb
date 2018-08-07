@@ -7,11 +7,26 @@ $(document).ready(function () {
     var dnitrabajador = 'cc';
     var horaAntigua ='';
     var horaInicial = '';
+    
+    
+    /*
+$('#tabla-horas tr ').onco(function () {
+        var id = $(this).attr('id');
+        //do something with id
+        alert('id'+id);
+})
+*/
 
+
+function myFunction(){
+    alert('hola');
+}
 function pintarCelda(horaParm, dniParm){
-    $("#tabla-horas > tbody > tr ").each(function(){
+    //alert('id='+horaParm+':'+dniParm);
+   $("#tabla-horas > tbody > tr ").each(function(){
     var tr = $(this);
     var tds = tr.find("td[id='"+horaParm+":"+dniParm+"']").css('background-color','#337ab7');
+   // tr.find("td[id='"+horaParm+":"+dniParm+"']").css('border','none');
     })
 }
 
@@ -132,7 +147,8 @@ function obtenerTrabajadores() {
                 var claseth = 'fc-day-header fc-widget-header fc-sun fc-past';
                 var clasef = 'scope="col"';
                 var fondo = 'style="background-color: #dddddd!important;"';
-                celda = '<th ' + tamanoCelda + ' class="' + claseth + '" ' + fondo + ' data-date="2018-07-22"><a>' + data[i].nombre + ' ' + data[i].apellido + ' </a></th>'
+             
+                celda = '<th ' + tamanoCelda + ' class="' + claseth + '" ' + fondo + ' data-date="2018-07-22"><a>' + cortarPrimeraPalabra(data[i].nombre) + ' ' + cortarPrimeraPalabra(data[i].apellido) + ' </a></th>'
                 $('#tabla-horas > thead > tr  ').append(celda);
                  var horas = [];
                 $('#tabla-horas > tbody > tr').each(function () {
@@ -140,8 +156,11 @@ function obtenerTrabajadores() {
                     var auxHora = this.id;
                     var str = "h6:00:00";
                     var idHora = auxHora.substring(1, 9);
-                    var argumentoProfesional = "'" + data[i].nombre + " " + data[i].apellido + "' , '"+data[i].DNI+"','"+this.id+"' ";                  
-                    tdcito = '<td id="'+idHora+':'+data[i].DNI+'"  onclick="agendarServicio(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
+                    
+                    var argumentoProfesional = "'" + cortarPrimeraPalabra(data[i].nombre) + " " + cortarPrimeraPalabra(data[i].apellido) + "' , '"+data[i].DNI+"','"+this.id+"' ";                  
+                    //tdcito = '<td id="'+idHora+':'+data[i].DNI+'"  onclick="agendarServicio(' + argumentoProfesional + ');" class="fc-day fc-widget-content " data-date="2018-07-27"></td>';
+                  // tdcito = '<td style="width: 58px"  class="fc-axis fc-time fc-widget-content" ></td>';
+                tdcito = '<td  id="'+idHora+':'+data[i].DNI+'" data-asig="false" data-prof="'+cortarPrimeraPalabra(data[i].nombre)+" " + cortarPrimeraPalabra(data[i].apellido)+'" data-dni="'+data[i].DNI+'" data-hor="'+this.id+'" class="fc-axis fc-time fc-widget-content " style="width: 58px;"></td>';
                     $(this).append(tdcito);
                 })
             }

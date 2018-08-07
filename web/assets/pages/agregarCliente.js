@@ -21,7 +21,9 @@ function botones(){
 		su.val("Agregar");
 		su.show();
 		$('input[name="dni"]').attr("disabled",false);
-		$('#myModal').modal("show");
+		 
+            $('#myModal').modal("show");
+               
 	});
 	$("form").submit(function(){
 		$('input[name="dni"]').removeAttr("disabled");
@@ -40,6 +42,7 @@ function mensajes(){
 	}
 }
 function obtenerGenero(){
+  
 	$.ajax({
 		url:"ServletCliente",
 		data:{data:5},
@@ -78,8 +81,11 @@ function obtenerBarrio(id){
 		success :function(data){	
 			var barrio=$("#barrio");
 			barrio.empty();
+                        barrio.append('<option value="178">Pocitos</option>');
 			$.each(data,function(i,val){
+                            if(val.id != 178){
 				barrio.append('<option value="'+val.id+'">'+val.nombre+'</option>');
+                            }
 			});
 		}
 	});

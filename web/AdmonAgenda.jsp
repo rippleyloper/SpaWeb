@@ -16,8 +16,17 @@
 
 <html>
     <head>
-        <style>
+           <style>
+table td {
+    border: 1px solid #999;
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+}
 
+td.selected {
+    background-color: #ffb3b3;
+}
             </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +38,10 @@
         <!-- Icono de pestaña -->
         <!-- <link rel="shortcut icon" href="assets/images/favicon.ico"> -->
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
         <link href="assets/css/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
@@ -59,6 +72,8 @@
         <!-- Start right Content here -->
 
         <div class="content-page">
+            
+ 
             <!-- Start content -->
             <div class="content">
 <%
@@ -99,7 +114,48 @@ SimpleDateFormat fh =
                                                 </div>
                                                 <div class="row">
                     <!-- Inicio modal -->
+       <div id="modalTiempo" class="modal fade" role="dialog">
+                        <div class="modal-dialog ">
+                  
 
+                  
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                         <h4 class="modal-title">Marcar Tiempo </h4>
+                       </div>
+                       <div class="modal-body">
+                         <div class="row">
+                             <div class="col-md-10 col-md-offset-1">
+                                     <form action="#" id="form" method="#">
+                                        
+                           
+                                  
+
+                                         
+                             <div class="row">
+                                 <div class="form-group">
+                                     <label for="Detalle">Motivo</label>
+                                 
+                             <input required="true"  name="motivo" id="motivo" class="form-control">
+                                 </div>
+                             </div>
+                                                                           
+                                                         <div class="row">
+                                                                 <div class="col-md-6 col-md-offset-3">
+                                                                         <input type="button" class="btn btn-success form-control" id="motivoBtn" value="Marcar Tiempo">
+                                                                 </div>
+                                                         </div>
+                                         </form>
+                                 </div>
+                         </div>
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-warning" id="cancelar" data-dismiss="modal">Cancelar</button>
+                       </div>
+                     </div>
+                 </div>
+         </div>
                  
                     <div id="modalFecha" class="modal fade" role="dialog">
                         <div class="modal-dialog ">
@@ -126,7 +182,7 @@ SimpleDateFormat fh =
                                                              <label for=""></label>
                                                              <input required="true" type="button" value="Buscar" id="buscarDni" class="btn btn-success form-control">
                                                      </div>
-                                                     <div class="col-md-3">a
+                                                     <div class="col-md-3">
                                                              <label for=""></label>
                                                              <input required="true" type="button" value="Registrar" id="registrarDni" onclick="window.location.href='AdmonCliente.jsp'" class="btn btn-info form-control">
                                                      </div>
@@ -221,8 +277,8 @@ SimpleDateFormat fh =
                                                                            
                                                                                <label for="Trabajador">Trabajador</label>
                                                                                   <input type="text" name="total2" id="trabajadortexto" class="form-control" disabled="true" value="Thomas Defecto" >
-                                                                                    <input type="text" name="total23" id="trabajador" class="form-control" disabled="true" value="Thomas Defecto" > 
-                                                                          <input type="text" name="total234" id="fecha" class="form-control" disabled="true" value="Thomas Defecto" > 
+                                                                                    <input  style="display: none!important;" type="text" name="total23" id="trabajador" class="form-control" disabled="true" value="Thomas Defecto" > 
+                                                                          <input  style="display: none!important;"  type="text" name="total234" id="fecha" class="form-control" disabled="true" value="Thomas Defecto" > 
                                                                          
                                                                          </div>
                                                                  </div>
@@ -429,95 +485,95 @@ SimpleDateFormat fh =
                                 
                             
                                  <tr id="h08:30:00" data-time="08:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8:30am</span></td>
+                                    <td id="08:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8:30am</span></td>
                                  
                                  </tr>
                                  <tr id="h08:45:00" data-time="08:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="8:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h09:00:00" data-time="09:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9am</span></td>
+                                    <td id="09:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9am</span></td>
                                   
                                  </tr>
                                  <tr id="h09:15:00" data-time="09:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="09:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                     
                                  </tr>
                                  <tr id="h09:30:00" data-time="09:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9:30am</span></td>
+                                    <td id="09:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9:30am</span></td>
                                    
                                  </tr>
                                  <tr id="h09:45:00" data-time="09:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="09:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                     
                                  </tr>
                                  <tr id="h10:00:00" data-time="10:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10am</span></td>
+                                    <td id="10:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10am</span></td>
                                   
                                  </tr>
                                  <tr id="h10:15:00" data-time="10:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="10:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h10:30:00" data-time="10:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10:30am</span></td>
+                                    <td id="10:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10:30am</span></td>
                                
                                  </tr>
                                  <tr id="h10:45:00" data-time="10:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="10:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h11:00:00" data-time="11:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11am</span></td>
+                                    <td id="11:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11am</span></td>
                                  
                                  </tr>
                                  <tr id="h11:15:00" data-time="11:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="11:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h11:30:00" data-time="11:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11:30am</span></td>
+                                    <td id="11:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11:30am</span></td>
                                    
                                  </tr>
                                  <tr id="h11:45:00" data-time="11:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="11:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h12:00:00" data-time="12:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>12pm</span></td>
+                                    <td  id="12:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>12pm</span></td>
                                    
                                  </tr>
                                  <tr id="h12:15:00" data-time="12:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="12:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h12:30:00" data-time="12:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>12:30pm</span></td>
+                                    <td id="12:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>12:30pm</span></td>
                                    
                                  </tr>
                                  <tr id="h12:45:00" data-time="12:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td  id="12:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                                  <tr id="h13:00:00" data-time="13:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>1pm</span></td>
+                                    <td id="13:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>1pm</span></td>
                                   
                                  </tr>
                                  <tr id="h13:15:00" data-time="13:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="13:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h13:30:00" data-time="13:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>1:30pm</span></td>
+                                    <td id="13:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>1:30pm</span></td>
                                   
                                  </tr>
                                  <tr id="h13:45:00" data-time="13:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="13:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h14:00:00" data-time="14:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>2pm</span></td>
+                                    <td id="14:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>2pm</span></td>
                                
                                  </tr>
                                  <tr id="h14:15:00" data-time="14:15:00" class="fc-minor">
@@ -525,155 +581,155 @@ SimpleDateFormat fh =
                                  
                                  </tr>
                                  <tr id="h14:30:00" data-time="h14:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>2:30pm</span></td>
+                                    <td id="14:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>2:30pm</span></td>
                                   
                                  </tr>
                                  <tr id="h14:45:00" data-time="14:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="14:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                                  <tr id="h15:00:00" data-time="15:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>3pm</span></td>
+                                    <td id="15:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>3pm</span></td>
                               
                                  </tr>
                                  <tr id="h15:15:00" data-time="15:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="15:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h15:30:00" data-time="15:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>3:30pm</span></td>
+                                    <td id="15:30:00:dni"class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>3:30pm</span></td>
                                   
                                  </tr>
                                  <tr id="h15:45:00" data-time="15:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="15:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h16:00:00" data-time="16:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>4pm</span></td>
+                                    <td id="16:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>4pm</span></td>
                                     
                                  </tr>
                                  <tr id="h16:15:00" data-time="16:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="16:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h16:30:00" data-time="16:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>4:30pm</span></td>
+                                    <td id="16:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>4:30pm</span></td>
                                 
                                  </tr>
                                  <tr id="h16:45:00" data-time="16:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="16:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h17:00:00" data-time="17:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>5pm</span></td>
+                                    <td id="17:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>5pm</span></td>
                                     
                                  </tr>
                                  <tr id="h17:15:00" data-time="17:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="17:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h17:30:00" data-time="17:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>5:30pm</span></td>
+                                    <td id="17:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>5:30pm</span></td>
                                   
                                  </tr>
                                  <tr id="h17:45:00" data-time="17:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="17:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                                  <tr id="h18:00:00" data-time="18:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>6pm</span></td>
+                                    <td id="18:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>6pm</span></td>
                                  
                                  </tr>
                                  <tr id="h18:15:00" data-time="18:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="18:15:00:dni"  class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                
                                  </tr>
                                  <tr id="h18:30:00" data-time="18:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>6:30pm</span></td>
+                                    <td id="18:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>6:30pm</span></td>
                                
                                  </tr>
                                  <tr id="h18:45:00" data-time="18:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="18:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h19:00:00" data-time="19:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>7pm</span></td>
+                                    <td id="19:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>7pm</span></td>
                                   
                                  </tr>
                                  <tr id="h19:15:00" data-time="19:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="19:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h19:30:00" data-time="19:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>7:30pm</span></td>
+                                    <td id="19:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>7:30pm</span></td>
                                 
                                  </tr>
                                  <tr id="h19:45:00" data-time="19:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="19:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                
                                  </tr>
                                  <tr id="h20:00:00" data-time="20:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8pm</span></td>
+                                    <td id="20:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8pm</span></td>
                         
                                  </tr>
                                  <tr id="h20:15:00" data-time="20:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="20:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                                  <tr id="h20:30:00" data-time="20:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8:30pm</span></td>
+                                    <td id="20:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>8:30pm</span></td>
                                    
                                  </tr>
                                  <tr id="h20:45:00" data-time="20:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="20:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                                  <tr id="h21:00:00" data-time="21:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9pm</span></td>
+                                    <td id="21:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9pm</span></td>
                                    
                                  </tr>
                                  <tr id="h21:15:00" data-time="21:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="21:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                   
                                  </tr>
                                  <tr id="h21:30:00" data-time="21:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9:30pm</span></td>
+                                    <td id="21:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>9:30pm</span></td>
                                 
                                  </tr>
                                  <tr id="h21:45:00" data-time="21:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="21:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h22:00:00" data-time="22:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10pm</span></td>
+                                    <td id="22:00:00:dni" id="22:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10pm</span></td>
                                    
                                  </tr>
                                  <tr id="h22:15:00" data-time="22:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="22:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h22:30:00" data-time="22:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10:30pm</span></td>
+                                    <td id="22:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>10:30pm</span></td>
                                    
                                  </tr>
                                  <tr id="h22:45:00" data-time="h22:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="22:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                  
                                  </tr>
                                  <tr id="h23:00:00" data-time="h23:00:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11pm</span></td>
+                                    <td id="23:00:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11pm</span></td>
                                  
                                  </tr>
                                  <tr id="h23:15:00" data-time="h23:15:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="23:15:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                    
                                  </tr>
                                  <tr id="h23:30:00" data-time="h23:30:00">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11:30pm</span></td>
+                                    <td id="23:30:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"><span>11:30pm</span></td>
                                    
                                  </tr>
                                  <tr id="h23:45:00" data-time="h23:45:00" class="fc-minor">
-                                    <td class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
+                                    <td id="23:45:00:dni" class="fc-axis fc-time fc-widget-content" style="width: 58px;"></td>
                                 
                                  </tr>
                               </tbody>
@@ -783,6 +839,7 @@ SimpleDateFormat fh =
                         </div> <!-- content -->
 
                         <footer class="footer">
+                            
                             © 2017 Upbond - By Themesdesign.
                         </footer>
 
@@ -809,9 +866,157 @@ SimpleDateFormat fh =
                     <script src="assets/js/jquery.nicescroll.js"></script>
                     <script src="assets/js/jquery.scrollTo.min.js"></script>
                     <script src="assets/pages/agenda.js"></script>
-                
+                    <script>
+                        
+                        
 
+/*function agendarServicio(nombre, dni, idHora){
+    
+}*/
 
+var table = $("#tabla-horas");    
+$('#tabla-horas #cuerpo-horas').on('click', '[data-asig^="fal"]', function () {
+    if($(this).attr("data-tiempo")!="true"){
+    agendarServicio($(this).attr("data-prof"),$(this).attr("data-dni"), $(this).attr("data-hor"));
+    }
+});
+$('#tabla-horas #cuerpo-horas').on('click', '[data-tiempo^="tru"]', function () {
+      // pintarCelda3();
+       // alert('pintando');
+      $('#modalTiempo').modal('show');
+        });
+        
+        
+        
+        
+        $('#motivoBtn').click(function(evt){
+            pintarCelda3($("#motivo").val());
+        })
+        function pintarCelda3(motivo){
+    $("#tabla-horas > tbody > tr ").each(function(){
+    var tr = $(this);
+    
+    var tds = tr.find('td[data-tiempo="true"]').html('<span  style="margin: 65px!important; color: white!important; font-weight: bold; 65px!important;"> '+motivo+'</span>');
+    tr.find('td[data-tiempo="true"]').css('background-color','#DB2F2F');
+    tr.find('td[data-tiempo="true"]').attr("data-asig", "true");
+    })
+}
+//function fun2(){
+//    alert('fun2');
+//}
+var isMouseDown = false;
+var startRowIndex = null;
+var startCellIndex = null;
+
+function selectTo(cell) {
+    
+    var row = cell.parent();    
+    var cellIndex = cell.index();
+    var rowIndex = row.index();
+    
+    var rowStart, rowEnd, cellStart, cellEnd;
+    
+    if (rowIndex < startRowIndex) {
+        rowStart = rowIndex;
+        rowEnd = startRowIndex;
+    } else {
+        rowStart = startRowIndex;
+        rowEnd = rowIndex;
+    }
+    
+    if (cellIndex < startCellIndex) {
+        cellStart = cellIndex;
+        cellEnd = startCellIndex;
+        
+    } else {
+        cellStart = startCellIndex;
+        cellEnd = cellIndex;
+    }        
+    
+    for (var i = rowStart; i <= rowEnd; i++) {
+        var rowCells = table.find("tr").eq(i).find("td");
+        for (var j = cellStart; j <= cellEnd; j++) {
+            rowCells.eq(j).addClass("selected");
+            rowCells.eq(j).attr("data-tiempo", "true");
+            rowCells.eq(j).attr("data-asig", "false");
+            
+        } 
+      
+    }
+   
+}
+$(document).ready(function() {
+    
+    
+    $(window).load(function() {
+        // this code will run after all other $(document).ready() scripts
+        // have completely finished, AND all page elements are fully loaded.
+ 
+table.find("td").mousedown(function (e) {
+
+   
+    isMouseDown = true;
+    var cell = $(this);
+    var estado = 0;
+  // table.find(".selected").attr("data-tiempo", "false");
+    //table.find(".selected").removeClass("selected"); // deselect everything
+    
+    if (e.shiftKey) {
+        selectTo(cell);
+     
+        
+    } else {
+       // cell.attr("data-tiempo", "true");
+      // cell.addClass("selected");
+        startCellIndex = cell.index();
+        startRowIndex = cell.parent().index();
+     
+ 
+    }
+    
+   
+       
+    return false; // prevent text selection
+})
+
+.mouseover(function () {
+   	
+    if (!isMouseDown) return;
+    table.find(".selected").attr("data-tiempo","false"); 
+    table.find(".selected").removeClass("selected");
+    selectTo($(this));
+  
+    
+})
+.bind("selectstart", function () {
+      
+    return false;
+});
+
+$(document).mouseup(function () {
+    isMouseDown = false;
+    
+
+});
+ 
+   });
+   
+});
+</script>
+
+<script>
+    $.each($("[data-time]").map(function() {  
+        
+        // alert($(this).data('time'));
+        return $(this).data('time');}).get(), function(index, item) {
+        
+        
+       
+   // item
+});
+    
+    
+</script>
                     <!--Morris Chart-->
 
                     <!-- Begin JS only this page -->

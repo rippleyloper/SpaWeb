@@ -92,19 +92,19 @@
                             <div class="row separacion">
                                 <div class="col-md-12">
                                     <label for="">DNI</label>
-                                    <input  required="true" type="text" name="dni" class="form-control" id="dni">
+                                    <input autocomplete="off" required="true" type="text" name="dni" onchange="darFormato();" class="form-control" id="dni">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Nombre">Nombre</label>
-                                    <input required="true" type="text" name="nombre"  maxlength="45" minlength="0" class="form-control">
+                                    <input id="nombres" onchange="inicialMayus(this);" autocomplete="off" required="true" type="text" name="nombre"  maxlength="45" minlength="0" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Apellido">Apellido</label>
-                                    <input required="true" type="text" maxlength="45" minlength="0" name="apellido" class="form-control">
+                                    <input id="appellidos" onchange="inicialMayus(this);" autocomplete="off" required="true" type="text" maxlength="45" minlength="0" name="apellido" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="Genero">Genero</label>
-                                    <select required="true"  name="genero" id="genero" class="form-control">
+                                    <select onchange="cargarDepartamento()" required="true"  name="genero" id="genero" class="form-control">
                                         <option value="0">Selecione</option>
                                     </select>
                                 </div>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="Direccion">Dirección</label>
-                                    <input required="true" maxlength="45" minlength="0" type="text" name="direccion" class="form-control">
+                                    <input id="dir" onchange="inicialMayus(this);" autocomplete="off" required="true" maxlength="45" minlength="0" type="text" name="direccion" class="form-control">
                                 </div>
                                 <div class="col-md-12">
                                     <label for="Departamento">Departamento</label>
@@ -234,6 +234,7 @@
         <script src="assets/js/waves.js"></script>
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/jquery.nicescroll.js"></script>
+        <script src="assets/js/frontutil.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
         <!-- Script solo para esta pagina -->

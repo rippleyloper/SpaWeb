@@ -279,6 +279,21 @@ public class ControladorTrabajador {
         con.desconectar();
         return true;
     }
+    public boolean removerTrabajador(int idTrabajador) throws ClassNotFoundException, Exception{
+        String sql = "DELETE FROM detalle_trabesp WHERE idTrabajador =?";
+        Conexion con = Conexion.newInstance();
+        PreparedStatement stm = con.getConexion().prepareStatement(sql);
+        stm.setInt(1, idTrabajador);
+        stm.executeQuery();
+        sql = "DELETE FROM trabajador WHERE trabajador.idTrabajador =?";
+        stm = con.getConexion().prepareStatement(sql);
+        stm.setInt(1, idTrabajador);
+        stm.executeQuery();
+        stm.close();
+        con.desconectar();
+        return true;
+        
+    }
 
     public ArrayList<Trabajador> obtenerEliminado() throws SQLException, ClassNotFoundException, Exception {
         String sql = "SELECT tra.idSucursal as id,per.`idBarrio`, su.idSucursal as 'idSucursal',`idGenero`, `dni`, per.`nombre`, `apellido`, per.`direccion` as direccion , `fechaNacimiento`, per.`numero` as numero, `correo` FROM `persona` per"

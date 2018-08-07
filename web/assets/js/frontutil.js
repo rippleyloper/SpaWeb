@@ -10,13 +10,41 @@ const tiempoFinal = moment(tiempoInicial, 'HH:mm:ss').add(minutosDuracion, 'minu
     return tiempoFinal;
     
 }
+window.onmousedown = function (e) {
+    var el = e.target;
+    if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+        e.preventDefault();
 
-function inicialMayus(item) {
-    var palabraMin = item.value.toLowerCase();
-    var palabraConv = (mayusPrimeraLetra(palabraMin));
-    $("#" + item.id).val(palabraConv);
+        // toggle selection
+        if (el.hasAttribute('selected')) el.removeAttribute('selected');
+        else el.setAttribute('selected', '');
 
+        // hack to correct buggy behavior
+        var select = el.parentNode.cloneNode(true);
+        el.parentNode.parentNode.replaceChild(select, el.parentNode);
+    }
 }
+function inicialMayus(item) {
+    var palabrasMinuscula = item.value.toLowerCase();
+    var arregloPalabra = palabrasMinuscula.split(" "); //retorna un array
+    var palabraConv = '';
+    
+    for (var i = 0; i < arregloPalabra.length; i++) {
+       palabraConv += mayusPrimeraLetra(arregloPalabra[i])+' ';
+    }
+ 
+   $("#"+item.id).val(palabraConv);
+    }
+
+function cortarPrimeraPalabra(palabra)
+{
+    var arregloPalabra = palabra.split(" ");
+    
+    return arregloPalabra[0];
+}    
+  
+
+
 function mayusPrimeraLetra(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
